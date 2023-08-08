@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />    
+    <meta name="description" content="Search and find pincodes and post offices in India. Start searching from a state and find pincode of a post office."/>
+    <meta name="keywords" content="pincode finder, pincode, pincode search,post office, pincode india, indian post, india post, postal code, zip code,pincode search engine,pincode of india,postal code of india,postal code locator tool"/>
+
+    <title>Pindcode Finder,Pincode Search, India Post Office Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      nav{
+        background-color: rgba(255,255,255,0.4);
+        border-left: 1px solid #ffffff80;
+        border-top: 1px solid #ffffff80;
+      }
+        body{
+            background-color:rgb(0, 0, 0);
+        }
+       
+        label{                
+            color: aliceblue;
+            margin-top: 55px;
+        }
+        input[type='text']{
+          color: white;
+          margin-bottom: 20px;
+          border-radius:5px 5px 5px 5px;
+          background-color: rgba(255,255,255,0.4);
+          border-left: 1px solid #ffffff80;
+          border-top: 1px solid #ffffff80;
+                 
+        }
+        input[type='submit']{
+          color: white; 
+          height: 30px;  
+          width: 70px;   
+          margin-left: 55px; 
+          border-radius: 7px 7px 7px 7px;         
+          background-color: rgba(255,255,255,0.4);
+          border-left: 2px solid #ffffff80;
+          border-top: 2px solid #ffffff80;
+        }
+        .Form-container{
+          margin-top: 20px;
+          height: 250px;
+          width:300px ;
+          border-radius: 10px 10px 10px 10px;          
+          background: rgba(255,255,255,0.2);
+          border-top: 1px solid #ffffff80;
+          border-left: 1px solid #ffffff80;
+          position: absolute;
+          left:40%;
+          display: flex;
+          justify-content: center;
+        }
+        .info{
+          /* margin-top: 300px; */
+          margin-left: 5px;
+          padding-top:20px;
+          padding-left: 10px;
+          border-radius: 10px 10px 10px 10px;
+          height: 250px;
+          width: 99vw;
+          color: white;
+          background-color: rgba(255,255,255,0.2);
+          border-top: 1px solid #ffffff80;
+          border-left: 1px solid #ffffff80;
+        }
+        #state{
+          margin-top: 20px;
+        }
+        .Table-container{
+          margin-left: 220px;
+          width: 70vw;
+          margin-top: 300px;
+          color: white;
+          background-color: rgba(255,255,255,0.2);
+          border-top: 1px solid #ffffff80;
+          border-left: 1px solid #ffffff80;
+        }
+        @media only screen and (max-width:360px){
+          #Form-container{
+            position: absolute;
+            left:30px;
+          }
+          #Table-container{
+          margin-left: 10px;
+          width: 90vw;
+          margin-top: 300px;
+          color: white;
+          background-color: rgba(255,255,255,0.2);
+          border-top: 1px solid #ffffff80;
+          border-left: 1px solid #ffffff80;
+          }
+          #info{
+            height: 500px;
+            width: 90vw;
+            margin-left: 10px;
+            padding: 10px 10px 10px 10px;
+          }
+        } 
+        @media only screen and (max-width:650px) and (min-width:361px){
+          #Form-container{
+            position: absolute;
+            left:170px;
+          }
+          #Table-container{
+          margin-left: 25px;
+          width: 90vw;
+          margin-top: 300px;
+          color: white;
+          background-color: rgba(255,255,255,0.2);
+          border-top: 1px solid #ffffff80;
+          border-left: 1px solid #ffffff80;
+          }
+          #info{
+            height: 350px;
+            width: 90vw;
+            margin-left: 25px;
+            padding: 10px 10px 10px 10px;
+          }
+        }          
+        
+        @media only screen and (max-width:950px) and (min-width:650px){
+          label{                
+            color: aliceblue;
+            margin-top: 55px;
+            font-size: 40px;
+        }
+        input[type='text']{
+          font-size: 25px;
+        }
+        input[type='submit']{
+          font-size:30px ;
+          height: 42px;
+          width: 150px;
+
+        }
+          .Form-container{
+          margin-top: 20px;
+          height: 300px;
+          width:500px ;
+          border-radius: 10px 10px 10px 10px;          
+          background: rgba(255,255,255,0.2);
+          border-top: 1px solid #ffffff80;
+          border-left: 1px solid #ffffff80;
+          position: absolute;
+          left:23%;
+          display: flex;
+          justify-content: center;
+
+          }
+          #Table-container{
+          margin-left: 35px;
+          width: 90vw;
+          margin-top: 350px;
+          color: white;
+          background-color: rgba(255,255,255,0.2);
+          border-top: 1px solid #ffffff80;
+          border-left: 1px solid #ffffff80;
+          }
+          #info{
+            height: 300px;
+            width: 90vw;
+            margin-left:35px;
+            padding: 10px 10px 10px 10px;
+          }
+
+        }     
+        
+        
+       
+    </style>
+  </head>
+
+  <body>
+
+    <script>
+      function show(form) {
+        var Cit = form.City.value;          
+
+        async function log() {
+          var response = await fetch("https://api.postalpincode.in/postoffice/"+ Cit);
+          var myObject = await response.json();
+          
+          let table = document.getElementById("Display");
+          for(var i=0;i<=myObject[0]["PostOffice"].length;i++){
+            let obj = myObject[0]["PostOffice"][i];
+            let row = document.createElement('tr');
+            let Area = document.createElement('td')
+            let pincode = document.createElement('td')
+
+            Area.innerHTML = obj.Name
+            pincode.innerHTML = obj.Pincode
+
+            row.appendChild(Area)
+            row.appendChild(pincode)
+
+            table.appendChild(row)
+          } 
+
+
+          // for(var i=0;i<=myObject[0]["PostOffice"].length;i++){
+          //   document.write("<table border=1><tr><td>"+myObject[0]["PostOffice"][i]["Name"] +"</td><td>"+myObject[0]["PostOffice"][i]["Pincode"] +"</td></tr></table>");
+          // }                      
+        }
+
+        log();
+      }
+    </script>
+   
+    
+
+
+    <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"><img src="Location.png" height="40px" width="40px" ></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">PinCode Finder</a>
+            </li>
+            </ul>            
+          </div>
+      </div>
+    </nav>
+
+
+    <div class="Form-container" id="Form-container">
+        <form>
+          <center>
+          <label>Enter City Name </label>
+        </center><br>
+          <input type="text" name="City" placeholder="Rajkot" /><br>
+          <input type="submit" onclick="show(this.form); return false;" />
+        </form>
+      </div>
+
+      <div class="Table-container"id="Table-container">
+        <table  class="table table-dark table-striped" >
+          <thead>
+            <tr>
+              <th scope="col">Area</th>
+              <th scope="col">PinCode</th>            
+            </tr>
+          </thead>
+          <tbody id="Display" >
+            
+          </tbody>
+        </table>
+      </div>
+
+     
+
+      <div class="info" id="info">
+        <h3>Find Pincode Of India</h3>
+        <p>Pin Code of India or Postal Index Number Code assigned via network of Post Office across India covering virtually length and breadth of Indian Territory. It is estimated that there are 1.54 Lakhs Post Offices shown in current data on India Post website. It covers 3M Sq KM area under this with More than 80% in rural areas.</p>
+
+      <p>Normally its 6 Digit long and Pin code is also referred as Post Code, Zip Code. To find PinCode across India, -Enter Name of District.</p>
+          
+      <p>Results will show Postal Code of Locality for City and State associated wth it. One can also check along with Pin Code, all post offices of India while browsing various links in the results of PinCode.
+      </p>
+      </div>
+
+      <footer>
+        
+      </footer>
+
+      
+      
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+  </body>
+</html>
